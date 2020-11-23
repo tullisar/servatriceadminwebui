@@ -35,10 +35,10 @@
 
 			                                $minutes_to_components = calculate_string($_POST['minutes']); // Calculate as math string
 
-                        			        $query = mysql_query("UPDATE " . trim($dbtable) . " SET minutes='" . $minutes_to_components . "',ip_address='" . trim($_POST['ipaddress']) . "',user_name='" . trim(mysql_real_escape_string($_POST['username'])) . "',reason='" . trim(mysql_real_escape_string($_POST['reason'])) . "',visible_reason='" . trim(mysql_real_escape_string($_POST['visiblereason'])) . "' WHERE user_name='" . trim(mysql_real_escape_string($_POST['username'])) . "' AND time_from='" . trim($_POST['starttime']) . "'");
-							if (!query){ $results = "failed, " . mysql_error(); }
+                        			        $query = mysqli_query("UPDATE " . trim($dbtable) . " SET minutes='" . $minutes_to_components . "',ip_address='" . trim($_POST['ipaddress']) . "',user_name='" . trim(mysqli_real_escape_string($_POST['username'])) . "',reason='" . trim(mysqli_real_escape_string($_POST['reason'])) . "',visible_reason='" . trim(mysqli_real_escape_string($_POST['visiblereason'])) . "' WHERE user_name='" . trim(mysqli_real_escape_string($_POST['username'])) . "' AND time_from='" . trim($_POST['starttime']) . "'");
+							if (!query){ $results = "failed, " . mysqli_error(); }
 							if (strpos(strtolower($results),"fail") !== false){ echo $results; exit; }
-							mysql_close($dbconnection);
+							mysqli_close($dbconnection);
 							echo "Ban updated successfully.";
 						}
 					?>

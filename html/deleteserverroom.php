@@ -27,12 +27,12 @@
 								$dbtable = get_config_value($configfile,"dbroomtable");
 								$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 								if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-								$query = mysql_query("SELECT * FROM " . $dbtable . " ORDER BY id");
-								if (!query){ echo "failed: " . mysql_error(); exit; }
-								while ($row = mysql_fetch_array($query)){
+								$query = mysqli_query("SELECT * FROM " . $dbtable . " ORDER BY id");
+								if (!query){ echo "failed: " . mysqli_error(); exit; }
+								while ($row = mysqli_fetch_array($query)){
 									echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
 								}	
-								mysql_close($dbconnection);
+								mysqli_close($dbconnection);
 							?>
 						</select>
 					</td>

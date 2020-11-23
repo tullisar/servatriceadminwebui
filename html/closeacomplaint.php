@@ -21,9 +21,9 @@
 				if (strpos(strtolower($dbtable),"fail") !== false){ $results = strtolower($dbtable); return $results; exit; }
 				$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 				if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-                	        $query = mysql_query("SELECT * FROM " . $dbtable . " WHERE id='" . $_POST['messageid'] . "'" );
-				if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
-				while ($row = mysql_fetch_array($query)){
+                	        $query = mysqli_query("SELECT * FROM " . $dbtable . " WHERE id='" . $_POST['messageid'] . "'" );
+				if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
+				while ($row = mysqli_fetch_array($query)){
 					$userfrom = $row['userfrom'];
 					$userabout = $row['userabout'];
 					$dateofproblem = $row['dtofproblem'];
@@ -36,7 +36,7 @@
 					$screenshoturl = $row['screenshoturl'];
 					$closingverdict = $row['closingverdict'];
 				}
-				mysql_close($dbconnection);
+				mysqli_close($dbconnection);
 			}
 		?>
 		<table align="center" border="1" cellpadding="5">

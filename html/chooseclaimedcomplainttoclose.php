@@ -38,9 +38,9 @@
 					if (strpos(strtolower($dbtable),"fail") !== false){ echo '<tr><td align="center" colspan="2">Failed to connect to database server, database tablename can not be blank.</td></tr>'; exit; }
 					$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 					if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-					$query = mysql_query("SELECT * FROM " . $dbtable . " WHERE dateresolved like '" . $nonresolved . "' AND moderator='" . $_SESSION['username'] . "'" );
-	              			if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
-					while ($row = mysql_fetch_array($query)){
+					$query = mysqli_query("SELECT * FROM " . $dbtable . " WHERE dateresolved like '" . $nonresolved . "' AND moderator='" . $_SESSION['username'] . "'" );
+	              			if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
+					while ($row = mysqli_fetch_array($query)){
 						$complaintcount = $complaintcount + 1;
 						echo '<tr>';
 						echo '<td>' . $row['id'] . '</td>';
@@ -52,7 +52,7 @@
 						echo '</tr>';
 					}
 					echo '<tr><td colspan="6" align="right">' . $complaintcount . ' Total unresolved claimed issues</td></tr>';	
-					mysql_close($dbconnection);
+					mysqli_close($dbconnection);
 				?>
 				<tr>
 					<td align="center" colspan="6"><input type="submit" value="Close Complaint" /></td>

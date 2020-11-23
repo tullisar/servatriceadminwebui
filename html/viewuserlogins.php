@@ -41,12 +41,12 @@
 							if (strpos(strtolower($dbusertable),"fail") !== false){ $results = strtolower($dbusertable); return $results; exit; }
 							$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 							if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-							$query = mysql_query("SELECT * FROM " . $dbtable . " WHERE user_name='" . $usertofind . "'");
-                	               			if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
-							while ($row = mysql_fetch_array($query)){
-								$regquery = mysql_query("SELECT name FROM " . $dbusertable . " WHERE name='" . $row['user_name'] . "'");
-                                                                if (!regquery){ $results = "failed, " . mysql_error(); return results; exit; }
-                                                                $regrow = mysql_fetch_array($regquery);
+							$query = mysqli_query("SELECT * FROM " . $dbtable . " WHERE user_name='" . $usertofind . "'");
+                	               			if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
+							while ($row = mysqli_fetch_array($query)){
+								$regquery = mysqli_query("SELECT name FROM " . $dbusertable . " WHERE name='" . $row['user_name'] . "'");
+                                                                if (!regquery){ $results = "failed, " . mysqli_error(); return results; exit; }
+                                                                $regrow = mysqli_fetch_array($regquery);
 								echo '<tr>';
 								echo '<td>' . $row['user_name'] . '</td>';
 								if (strtolower($regrow['name']) == strtolower($row['user_name'])){ echo "<td>YES</td>"; } else { echo "<td>NO</td>"; }
@@ -56,7 +56,7 @@
 								echo '</tr>';
 							}
 							echo '<tr><td colspan="5" align="right">(' . $usertofind . ') User Sessions</td></tr>';	
-							mysql_close($dbconnection);
+							mysqli_close($dbconnection);
 						?>
 					</table>
 				</td>

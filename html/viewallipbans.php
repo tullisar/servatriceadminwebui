@@ -41,10 +41,10 @@
 						if (strpos(strtolower($dbtable),"fail") !== false){ $results = strtolower($dbtable); return $results; exit; }
 						$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 						if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-						$query = mysql_query("SELECT * FROM " . $dbtable . " WHERE ip_address = '" . mysql_real_escape_string($usertofind) . "' ORDER BY time_from DESC");
-						if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
+						$query = mysqli_query("SELECT * FROM " . $dbtable . " WHERE ip_address = '" . mysqli_real_escape_string($usertofind) . "' ORDER BY time_from DESC");
+						if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
 						$i= 0;
-						while ($row = mysql_fetch_array($query)){
+						while ($row = mysqli_fetch_array($query)){
 							$i = $i + 1;
 							$moderatorname = locate_username_byid($row['id_admin']);
 							echo '<tr>';
@@ -65,7 +65,7 @@
 							echo '</form>';
 							echo '</tr>';
 						}	
-						mysql_close($dbconnection);
+						mysqli_close($dbconnection);
 						echo '<tr><td colspan="9" align="left">' . $i . ' Total Bans</td></tr>';
 					?>
 				</table>

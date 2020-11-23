@@ -1,0 +1,9 @@
+{
+    "require": {
+        "phlak/config": "^7.0"
+    },
+
+    "autoload": { 
+        "psr-4": { "ServatriceAWUI\\": "src/" }
+    }
+}

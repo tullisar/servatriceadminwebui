@@ -41,10 +41,10 @@
 					if (strpos(strtolower($dbtable),"fail") !== false){ $results = strtolower($dbtable); return $results; exit; }
 					$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 					if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-					$query = mysql_query("SELECT * FROM " . $dbtable . " WHERE admin != 0");
-					if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
+					$query = mysqli_query("SELECT * FROM " . $dbtable . " WHERE admin != 0");
+					if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
 					$i= 0;
-					while ($row = mysql_fetch_array($query)){
+					while ($row = mysqli_fetch_array($query)){
 						$i = $i + 1;
 						echo '<tr>';
 						echo '<td>' . $row['name'] . '</td>';
@@ -54,7 +54,7 @@
 						echo '<td>' . $row['country'] . '</td>';
 						echo '</tr>';
 					}	
-					mysql_close($dbconnection);
+					mysqli_close($dbconnection);
 					echo '<tr><td colspan="4" align="right">' . $i . ' Total Admin/Moderators</td></tr>';
 				?>
 			</tr>

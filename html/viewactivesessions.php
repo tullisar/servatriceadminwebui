@@ -36,10 +36,10 @@
 								if (strpos(strtolower($dbtable),"fail") !== false){ $results = strtolower($dbtable); return $results; exit; }
 								$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 								if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-								$query = mysql_query("SELECT * FROM " . $dbtable . " WHERE end_time IS NULL");
-                	                			if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
+								$query = mysqli_query("SELECT * FROM " . $dbtable . " WHERE end_time IS NULL");
+                	                			if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
 								$usercount = 0;
-								while ($row = mysql_fetch_array($query)){
+								while ($row = mysqli_fetch_array($query)){
 									$usercount = $usercount + 1;
 									echo '<tr>';
 									echo '<td>' . $row['user_name'] . '</td>';
@@ -48,7 +48,7 @@
 									echo '</tr>';
 								}
 								echo '<tr><td colspan="3" align="right">' . $usercount . ' Total Users</td></tr>';	
-								mysql_close($dbconnection);
+								mysqli_close($dbconnection);
 							?>
 						</table>
 					</form>

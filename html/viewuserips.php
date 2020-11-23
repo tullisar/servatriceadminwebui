@@ -37,15 +37,15 @@
 							if (strpos(strtolower($dbusertable),"fail") !== false){ $results = strtolower($dbusertable); return $results; exit; }
 							$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 							if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-							$query = mysql_query("SELECT DISTINCT(ip_address) FROM " . $dbtable . " WHERE user_name='" . $usertofind . "'");
-                	               			if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
-							while ($row = mysql_fetch_array($query)){
+							$query = mysqli_query("SELECT DISTINCT(ip_address) FROM " . $dbtable . " WHERE user_name='" . $usertofind . "'");
+                	               			if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
+							while ($row = mysqli_fetch_array($query)){
 								echo '<tr>';
 								echo '<td>' . $row['ip_address'] . '</td>';
 								echo '</tr>';
 							}
 							echo '<tr><td colspan="5" align="right">(' . $usertofind . ') User IPs</td></tr>';	
-							mysql_close($dbconnection);
+							mysqli_close($dbconnection);
 						?>
 					</table>
 				</td>

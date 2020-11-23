@@ -32,11 +32,11 @@
 		echo '                    var data = google.visualization.arrayToDataTable([';
 		echo '                    [\'Time\', \'Players\', \'Games\'],';
 		$dbconnection = connect_to_database($databaseserver,$databaseusername,$databasepassword,$databasetouse);
-		$query = mysql_query("SELECT * FROM " . $uptimetable . " WHERE timest LIKE '" . $currentdate . " " . $currenthour . "%' AND id_server = " . $serverid);
-		while ($row = mysql_fetch_array($query)){
+		$query = mysqli_query("SELECT * FROM " . $uptimetable . " WHERE timest LIKE '" . $currentdate . " " . $currenthour . "%' AND id_server = " . $serverid);
+		while ($row = mysqli_fetch_array($query)){
 			echo '[\'' . date_format(date_create($row['timest']), 'h:i:s A') . '\',' . $row['users_count'] . ',' . $row['games_count'] . '],';
 		}
-		mysql_close($dbconnection);                                                                                                                                                                                                                                                                                                             
+		mysqli_close($dbconnection);                                                                                                                                                                                                                                                                                                             
 		echo '                    ]);';
 		echo '                        ';                                                                      
 		echo '                    var options = {';

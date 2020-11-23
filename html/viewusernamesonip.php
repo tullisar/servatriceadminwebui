@@ -41,12 +41,12 @@
 							if (strpos(strtolower($dbusertable),"fail") !== false){ $results = strtolower($dbusertable); return $results; exit; }
 							$dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
 							if (strpos(strtolower($dbconnection),"fail") !== false){ $results = strtolower($dbconnection); return $results; exit; }
-							$query = mysql_query("SELECT * FROM " . $dbtable . " WHERE ip_address='" . $iptofind . "' order by start_time ASC");
-                	               			if (!query){ $results = "failed, " . mysql_error(); return $results; exit; }
-							while ($row = mysql_fetch_array($query)){
-								$regquery = mysql_query("SELECT name FROM " . $dbusertable . " WHERE name='" . $row['user_name'] . "'");
-								if (!regquery){ $results = "failed, " . mysql_error(); return results; exit; }
-								$regrow = mysql_fetch_array($regquery);
+							$query = mysqli_query("SELECT * FROM " . $dbtable . " WHERE ip_address='" . $iptofind . "' order by start_time ASC");
+                	               			if (!query){ $results = "failed, " . mysqli_error(); return $results; exit; }
+							while ($row = mysqli_fetch_array($query)){
+								$regquery = mysqli_query("SELECT name FROM " . $dbusertable . " WHERE name='" . $row['user_name'] . "'");
+								if (!regquery){ $results = "failed, " . mysqli_error(); return results; exit; }
+								$regrow = mysqli_fetch_array($regquery);
 								echo '<tr>';
 								echo '<td>' . $row['user_name'] . '</td>';
 								echo '<td>' . $row['ip_address'] . '</td>';
@@ -55,7 +55,7 @@
                                                                 if ($row['end_time'] == 'NULL'){ echo '<td></td>'; } else { echo '<td>' . $row['end_time'] . '</td>'; }
                                                                 echo '</tr>';
 							}
-							mysql_close($dbconnection);
+							mysqli_close($dbconnection);
 						?>
 					</table>
 				</td>

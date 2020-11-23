@@ -36,20 +36,20 @@
 		$previousdate = date('Y-m-d', strtotime('-1 day', strtotime($currentdate)));
 		for ($i=16; $i < 24; $i++){
 			$currenthour = $i;
-			$query = mysql_query("SELECT * FROM " . $uptimetable . " WHERE timest LIKE '" . $previousdate . " " . $currenthour . "%' AND id_server = " . $serverid);
-   		             while ($row = mysql_fetch_array($query)){
+			$query = mysqli_query("SELECT * FROM " . $uptimetable . " WHERE timest LIKE '" . $previousdate . " " . $currenthour . "%' AND id_server = " . $serverid);
+   		             while ($row = mysqli_fetch_array($query)){
                 	     echo '[\'' . date_format(date_create($row['timest']), 'h:i:s A') . '\',' . $row['users_count'] . ',' . $row['games_count'] . '],';
 	                }
 	        }
 	        
 	        for ($i=0; $i < 10; $i++){
 	        	$currenthour = $i;
-			$query = mysql_query("SELECT * FROM " . $uptimetable . " WHERE timest LIKE '" . $currentdate . " " . $currenthour . "%' AND id_server = " . $serverid);
-			while ($row = mysql_fetch_array($query)){
+			$query = mysqli_query("SELECT * FROM " . $uptimetable . " WHERE timest LIKE '" . $currentdate . " " . $currenthour . "%' AND id_server = " . $serverid);
+			while ($row = mysqli_fetch_array($query)){
 				echo '[\'' . date_format(date_create($row['timest']), 'h:i:s A') . '\',' . $row['users_count'] . ',' . $row['games_count'] . '],';
 			}
 		}
-		mysql_close($dbconnection);                                                                                                                                                                                                                                                                                                             
+		mysqli_close($dbconnection);                                                                                                                                                                                                                                                                                                             
 		echo '                    ]);';
 		echo '                        ';                                                                      
 		echo '                    var options = {';

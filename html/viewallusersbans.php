@@ -44,12 +44,12 @@
                         $dbconnection = connect_to_database($dbserv,$dbuser,$dbpass,$dbname);
                         if (strpos(strtolower($dbconnection),"fail") !== false) return strtolower($dbconnection);
 
-                        $usertofind = mysql_real_escape_string($usertofind);
+                        $usertofind = mysqli_real_escape_string($usertofind);
                         
-                        $query = mysql_query("SELECT * FROM `$dbtable` WHERE user_name = '$usertofind' ORDER BY time_from DESC") or die(mysql_error());
+                        $query = mysqli_query("SELECT * FROM `$dbtable` WHERE user_name = '$usertofind' ORDER BY time_from DESC") or die(mysqli_error());
 
                         $i = 0;
-                        while ($row = mysql_fetch_array($query))
+                        while ($row = mysqli_fetch_array($query))
                         {
                             $i++;
                             $moderatorname = locate_username_byid($row['id_admin']);
@@ -71,7 +71,7 @@
                                 </form>
                                 </tr>";
                         }   
-                        mysql_close($dbconnection);
+                        mysqli_close($dbconnection);
                         echo "<tr><td colspan='9' align='left'>$i Total Bans</td></tr>";
                     ?>
                 </table>
